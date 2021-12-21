@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: white;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.link {
+  display: block;
+  margin-top: 1em;
+}
