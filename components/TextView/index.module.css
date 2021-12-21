@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.container {
+    background-color: #303038;
+    position: relative;
+    height: 6em;
+    width: 100%;
+    border-radius: 1em;
+}
+
+.container:hover {
+    opacity: 0.88;
+}
+
+.label {
+    position: absolute;
+    color: #9396e0;
+    font-weight: 300;
+    top: 0.5em;
+    left: 1.8em;
+    font-size: 0.9em;
+}
+
+.input {
+    position: absolute;
+    background-color: transparent;
+    border-radius: 1em;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+}

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Card from '../../../components/Card'
 import Button from '../../../components/Button'
 import TextInput from '../../../components/TextInput'
+import TextView from '../../../components/TextView'
+
 import styles from './index.module.css'
 
 const AppEditPage = () => {
@@ -9,14 +11,16 @@ const AppEditPage = () => {
   const [name, setName] = useState('')
   const [logoUrl, setLogoUrl] = useState('')
   const [apkUrl, setApkUrl] = useState('')
-  
+  const [category, setCategory] = useState('')
+  const [description, setDescription] = useState('')
+
 
   return (
     <div className={styles.container}>
       <Card
         title="List new dApp"
         isBackEnabled={true}>
-        
+
         <div className={styles.inputs}>
           <TextInput
             label="Name"
@@ -33,12 +37,22 @@ const AppEditPage = () => {
             value={apkUrl}
             onValueChange={setApkUrl}
           />
+          <TextInput
+            label="Category"
+            value={category}
+            onValueChange={setCategory}
+          />
+          <TextView
+            label="Description"
+            value={description}
+            onValueChange={setDescription}
+          />
         </div>
 
         <div className={styles.buttons}>
           <Button
             label="Continue"
-            onClick={() => {}}
+            onClick={() => { }}
           />
         </div>
 
