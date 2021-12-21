@@ -1,0 +1,15 @@
+.container {
+  color: white;
+  border: none;
+  background-color: #5159e9;
+  font-size: 1.1em;
+  height: 3.2em;
+  min-width: 8em;
+  width: auto;
+  border-radius: 10em;
+  cursor: pointer;
+}
+
+.container:hover {
+  opacity: 0.94;
+}

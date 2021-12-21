@@ -1,0 +1,32 @@
+.container {
+  background-color: #303038;
+  position: relative;
+  height: 3.5em;
+  border-radius: 10em;
+}
+
+.container:hover {
+  opacity: 0.88;
+}
+
+.label {
+  position: absolute;
+  color: #9396e0;
+  font-weight: 300;
+  top: 0.5em;
+  left: 1.8em;
+  font-size: 0.9em;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+  color: white;
+  position: absolute;
+  top: 0;
+  padding: 1.35em 1.5em 0 1.5em;
+  font-size: 1.1em;
+  outline: none;
+}
