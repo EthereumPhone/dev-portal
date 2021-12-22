@@ -1,7 +1,14 @@
-.app-header {
+.container {
   padding: 1.5em 1.5em;
 }
 
-.logo {
-  width: 6em;
+@media (max-width: 768px) {
+
+  .logo {
+    width: 6em;
+  }
+
+  .container {
+    padding: 1.2em 1.2em;
+  }
 }
