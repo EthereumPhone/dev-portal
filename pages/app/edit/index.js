@@ -12,7 +12,7 @@ const AppEditPage = () => {
   
 
   return (
-    <div className={styles.container}>
+    <>
       <Card
         title="List new dApp"
         isBackEnabled={true}>
@@ -37,13 +37,14 @@ const AppEditPage = () => {
 
         <div className={styles.buttons}>
           <Button
+            className={styles['continue-button']}
             label="Continue"
             onClick={() => {}}
           />
         </div>
 
       </Card>
-    </div>
+    </>
   )
 }
 

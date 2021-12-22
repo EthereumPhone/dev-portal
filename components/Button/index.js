@@ -4,9 +4,9 @@ export const ButtonType = {
   PRIMARY: 'PRIMARY'
 }
 
-const Button = ({ label, onClick }) => (
+const Button = ({ label, onClick, className }) => (
   <button
-    className={styles.container}
+    className={`${styles.container} ${className}`}
     onClick={onClick}>
     {label}
   </button>

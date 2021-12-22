@@ -11,3 +11,13 @@
   display: flex;
   justify-content: end;
 }
+
+.continue-button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .continue-button {
+    width: auto;
+  }
+}

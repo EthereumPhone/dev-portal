@@ -16,7 +16,7 @@ const Card = ({ isBackEnabled = false, title, children }) => (
       }
     </div>
 
-    <div className={styles.body}>
+    <div className={styles.children}>
       {children}
     </div>
   </div>
