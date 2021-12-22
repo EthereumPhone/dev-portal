@@ -10,9 +10,11 @@
 .title {
   font-size: 2em;
   margin-bottom: 1em;
+  text-align: center;
 }
 
 .link {
   display: block;
   margin-top: 1em;
+  text-decoration: underline;
 }
