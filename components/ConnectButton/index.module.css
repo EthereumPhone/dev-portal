@@ -1,0 +1,25 @@
+.container {
+  cursor: pointer;
+  border: none;
+  background-color: #221f34;
+  background-color: white;
+  border-radius: 10em;
+  height: 2.8em;
+  width: 11.5em;
+  color: #9396e0;
+}
+
+.connected {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.6em;
+}
+
+.circle {
+  background-color: #CF7204;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+}
