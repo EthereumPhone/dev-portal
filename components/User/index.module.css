@@ -1,0 +1,26 @@
+.container {
+    width: 10em;
+    height: 2em;
+    padding: 0 0.5em 0 0.5em;
+    background-color: #41414b;
+    border-radius: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wallet {
+    width: 7.5em;
+    height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #9396e0;
+}
+
+.img {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: orange;
+}

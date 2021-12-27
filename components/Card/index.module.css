@@ -1,23 +1,22 @@
 .header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .title {
-  color: white;
-  font-weight: bold;
-  line-height: 170%;
-  font-size: 1.4em;
-  margin-left: 0.5em;
-
+    color: white;
+    font-weight: bold;
+    line-height: 170%;
+    font-size: 1.4em;
+    margin-left: 0.5em;
 }
 
 .container {
-  background-color: #232323;
-  padding: 2.5em;
-  border-radius: 32px;
-  width: 27em;
-  min-height: 20em;
-  box-sizing: border-box;
+    background-color: #232323;
+    padding: 2.5em;
+    border-radius: 32px;
+    width: 27em;
+    min-height: 20em;
+    box-sizing: border-box;
 }

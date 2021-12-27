@@ -3,6 +3,7 @@ import Card from '../../../components/Card'
 import Button from '../../../components/Button'
 import TextInput from '../../../components/TextInput'
 import TextView from '../../../components/TextView'
+import Link from 'next/link'
 
 import styles from './index.module.css'
 
@@ -49,12 +50,15 @@ const AppEditPage = () => {
           />
         </div>
 
-        <div className={styles.buttons}>
-          <Button
-            label="Continue"
-            onClick={() => { }}
-          />
-        </div>
+        <Link href="../app/listing">
+          <div className={styles.buttons}>
+            <Button
+              label="Continue"
+              onClick={() => { }}
+            />
+          </div>
+        </Link>
+
 
       </Card>
     </div>

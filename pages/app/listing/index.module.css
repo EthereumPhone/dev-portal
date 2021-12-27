@@ -1,0 +1,90 @@
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+div.actions>* {
+    margin-right: 1em;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    line-height: 170%;
+    font-size: 1.4em;
+    margin-left: 0.5em;
+}
+
+.cardhero {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    padding: 1em 0;
+    align-items: end;
+}
+
+.img {
+    width: 5em;
+    height: 5em;
+    background-color: #9396e0;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 1em;
+}
+
+.dapptitle {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    line-height: 150%;
+    font-size: 1.4em;
+}
+
+.dapptype {
+    margin: 0;
+    color: #9396e0;
+    font-weight: bold;
+    line-height: 150%;
+    font-size: 0.7em;
+    text-transform: uppercase;
+}
+
+.description_short {
+    margin: 0;
+    color: white;
+    font-weight: 300;
+    line-height: 150%;
+    font-size: 0.8em;
+}
+
+.description {
+    margin-bottom: 3em;
+}
+
+.description_title {
+    margin: 0;
+    color: white;
+    font-weight: 300;
+    line-height: 170%;
+    font-size: 0.95em;
+}
+
+.description_text {
+    margin: 0;
+    color: white;
+    font-weight: 300;
+    line-height: 120%;
+    font-size: 0.75em;
+}
