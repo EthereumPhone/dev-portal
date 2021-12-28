@@ -1,6 +1,9 @@
 import styles from './index.module.css'
 
-const toFriendlyAddress = (address) => {
+import useMetaMask from '../../components/MetaMaskProvider';
+
+
+const generateFriendlyAddress = (address) => {
   const headCharCount = 6
   const tailCharCount = 4
 
@@ -10,31 +13,51 @@ const toFriendlyAddress = (address) => {
   return `${headSlice}...${tailSlice}`
 }
 
-const ConnectedButton = ({ address }) => (
-  <div className={styles.connected}>
-    <span>{toFriendlyAddress(address)}</span>
+const tryGenerateFriendlyAddress = (address) => (
+  address
+    ? generateFriendlyAddress(address)
+    : ''
+)
+
+const ConnectedButton = ({ address, onClick }) => (
+  <div
+    className={styles.connected}
+    onClick={onClick}>
+
+    <span>{tryGenerateFriendlyAddress(address)}</span>
     <div className={styles.circle}></div>
   </div>
 )
 
-const DisconnectedButton = () => (
-  <span className={styles.disconnected}>
-    Connect Wallet
-  </span>
-)
-
-const ConnectButton = ({ address, onClick }) => (
-  <button
-    className={styles.container}
+const DisconnectedButton = ({ onClick }) => (
+  <div 
+    className={styles.disconnected}
     onClick={onClick}>
 
-    {address &&
-      <ConnectedButton address={address} />
-    }
-    {!address &&
-      <DisconnectedButton />
-    }
-  </button>  
+    <span>Connect Wallet</span>
+  </div>
 )
+
+const ConnectButton = () => {
+
+  const { connect, disconnect, isConnected, account } = useMetaMask()
+
+  return (
+    <button className={styles.container}>
+
+      {isConnected &&
+        <ConnectedButton
+          address={account}
+          onClick={disconnect}
+        />
+      }
+      {!isConnected &&
+        <DisconnectedButton
+          onClick={connect}
+        />
+      }
+    </button> 
+  ) 
+}
 
 export default ConnectButton
