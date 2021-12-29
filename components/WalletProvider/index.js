@@ -10,7 +10,7 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider,
     options: {
-      infuraId: "31d8b02dda03471aa9453fd2cda79402",
+      infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
       pollingInterval: 12000
     }
   }
@@ -31,7 +31,7 @@ export const WalletProvider = ({ children }) => {
 
   const buildModal = () => {
     const modal = new Web3Modal({
-      network: 'rinkeby',
+      network: process.env.NEXT_PUBLIC_NETWORK_NAME,
       cacheProvider: true,
       providerOptions
     })
