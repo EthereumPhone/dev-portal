@@ -40,14 +40,14 @@ const DisconnectedButton = ({ onClick }) => (
 
 const ConnectButton = () => {
 
-  const { connect, disconnect, isConnected, account } = useWallet()
+  const { connect, disconnect, isConnected, address } = useWallet()
 
   return (
     <button className={styles.container}>
 
       {isConnected &&
         <ConnectedButton
-          address={account}
+          address={address}
           onClick={disconnect}
         />
       }

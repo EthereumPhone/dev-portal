@@ -1,0 +1,13 @@
+.web3modal-provider-name {
+  font-size: 1.2em !important;
+}
+
+.web3modal-provider-description {
+  font-size: 0.8em !important;
+  margin-top: 0.5em !important;
+  color: #232323;
+}
+
+.web3modal-provider-wrapper {
+  padding: 1em !important;
+}

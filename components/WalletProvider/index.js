@@ -1,60 +1,99 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Web3Modal from 'web3modal'
 
 
-export const WalletContext = React.createContext(null)
+const providerOptions = {
+  injected: {
+    package: null
+  },
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      infuraId: "31d8b02dda03471aa9453fd2cda79402",
+      pollingInterval: 12000
+    }
+  }
+}
 
+export const WalletContext = React.createContext(null)
 
 export const WalletProvider = ({ children }) => {
 
-  const [isConnected, setIsConnected] = useState(false)
-  const [isConnecting, setIsConnecting] = useState(false)
-  const [provider, setProvider] = useState(null)
-  const [account, setAccount] = useState('')
+  const [state, setState] =  useState({
+    modal: null,
+    provider: null,
+    isConnecting: false,
+    isConnected: false,
+    address: ''
+  })
 
+
+  const buildModal = () => {
+    const modal = new Web3Modal({
+      network: 'rinkeby',
+      cacheProvider: true,
+      providerOptions
+    })
+    setState({ ...state, modal })
+  }
+
+  useEffect(buildModal, [])
+
+
+  const subscribeToEvents = () => {
+    state.provider.on('accountsChanged', async (accounts) => {
+      setState({ ...state, account: accounts[0] })
+    })
+  }
+
+  const trySubscribeToEvents = () => {
+    if (state.provider) {
+      subscribeToEvents()
+    }
+  }
+
+  useEffect(() => {
+    trySubscribeToEvents()
+  }, [state.provider])
 
   const connect = async () => {
 
-    const providerOptions = {
-      injected: {
-        package: null
-      },
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          infuraId: "https://rinkeby.infura.io/v3/31d8b02dda03471aa9453fd2cda79402"
-        }
-      }
-    };
+    setState({ ...state, isConnecting: true })
 
-    const web3Modal = new Web3Modal({
-      network: "rinkeby",
-      providerOptions
-    });
+    const provider = await state.modal.connect()
 
-    const provider = await web3Modal.connect()
-    //setProvider(provider)
+    setState({
+      ...state,
+      provider,
+      isConnecting: false,
+      isConnected: true,
+      address: provider.selectedAddress || provider.accounts[0]
+    })
   }
 
   const disconnect = async () => {
-    try {
-      await deactivate()
-    } catch (error) {
-      console.log('Error on disconnect: ', error)
-    }
+    await state.modal.clearCachedProvider()
+    await state.provider.close && state.provider.close()
+
+    setState({
+      ...state,
+      provider: null,
+      isConnecting: false,
+      isConnected: false,
+      address: ''
+    })
   }
 
   const values = useMemo(
     () => ({
-      isConnecting,
+      isConnecting: state.isConnecting,
+      isConnected: state.isConnected,
+      address: state.address,
       connect,
-
-      disconnect,
-      isConnected,
-      account
+      disconnect
     }),
-    [isConnecting, isConnected, account]
+    [state]
   )
 
   return (
