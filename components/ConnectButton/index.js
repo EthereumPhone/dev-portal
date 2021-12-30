@@ -1,6 +1,6 @@
 import styles from './index.module.css'
 
-import useMetaMask from '../../components/MetaMaskProvider';
+import useWallet from '../../components/WalletProvider';
 
 
 const generateFriendlyAddress = (address) => {
@@ -40,14 +40,14 @@ const DisconnectedButton = ({ onClick }) => (
 
 const ConnectButton = () => {
 
-  const { connect, disconnect, isConnected, account } = useMetaMask()
+  const { connect, disconnect, isConnected, address } = useWallet()
 
   return (
     <button className={styles.container}>
 
       {isConnected &&
         <ConnectedButton
-          address={account}
+          address={address}
           onClick={disconnect}
         />
       }
