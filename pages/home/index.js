@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import Link from '../../components/Link'
 import styles from './index.module.css'
 
 const HomePage = () => (
@@ -14,11 +14,11 @@ const HomePage = () => (
         !!! Under active development !!!
       </span>
 
-      <Link href="/app/edit">
-        <a className={styles.link}>
-          App edit view
-        </a>
-      </Link>
+      <Link
+        label="App edit view"
+        href="/app/edit"
+      />
+
     </main>
   </div>
 )

@@ -1,0 +1,9 @@
+.container {
+  color: #a3a0ff;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.container:hover {
+  opacity: 0.9;
+}
