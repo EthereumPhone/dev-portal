@@ -16,7 +16,8 @@ const AppEditPage = () => {
     <ConnectedPage>
       <Card
         title="List new dApp"
-        isBackEnabled={true}>
+        isBackEnabled={true}
+        backPath="/app/list">
         
         <div className={styles.inputs}>
           <TextInput

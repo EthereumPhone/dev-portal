@@ -1,15 +1,14 @@
 import Image from 'next/image'
-import { withRouter } from 'next/router'
 import styles from './index.module.css'
 import arrowSrc from './arrow.svg'
 
-const BackButton = ({ router, className }) => (
+const BackButton = ({ className, onClick }) => (
   <Image
     className={`${styles.container} ${className}`}
     src={arrowSrc}
     alt="back"
-    onClick={router.back}
+    onClick={onClick}
   />
 )
 
-export default withRouter(BackButton)
+export default BackButton
