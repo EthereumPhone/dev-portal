@@ -22,6 +22,10 @@ const HomePage = () => (
         label="App edit view"
         href="/app/edit"
       />
+      <Link
+        label="Listed apps view"
+        href="/app/list"
+      />
 
     </main>
   </div>

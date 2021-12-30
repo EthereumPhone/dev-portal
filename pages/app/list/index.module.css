@@ -1,0 +1,27 @@
+.body {
+  height: 30em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-text {
+  color: white;
+  opacity: 0.5;
+  text-align: center;
+  line-height: 140%;
+  font-size: 0.9em;
+  margin-top: 2em;
+}
+
+.button {
+  width: 100%;
+}
