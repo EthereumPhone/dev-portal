@@ -1,0 +1,7 @@
+.body {
+  padding-top: 2em;
+  height: 10em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

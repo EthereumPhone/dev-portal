@@ -15,6 +15,10 @@ const HomePage = () => (
       </span>
 
       <Link
+        label="Wallet connect view"
+        href="/connect"
+      />
+      <Link
         label="App edit view"
         href="/app/edit"
       />
