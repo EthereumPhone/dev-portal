@@ -1,6 +1,6 @@
 import styles from './index.module.css'
 
-import useWallet from '../../components/WalletProvider';
+import { useWallet } from '../../components/WalletProvider'
 
 
 const generateFriendlyAddress = (address) => {

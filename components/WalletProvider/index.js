@@ -103,7 +103,7 @@ export const WalletProvider = ({ children }) => {
   )
 }
 
-export default function useWallet() {
+export const useWallet = () => {
   const context = React.useContext(WalletContext)
 
   if (context === undefined) {
