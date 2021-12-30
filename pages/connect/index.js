@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Card from '../../components/Card'
 import Button from '../../components/Button'
 import Link from '../../components/Link'
@@ -5,15 +6,35 @@ import { useWallet } from '../../components/WalletProvider'
 import { useRouter } from 'next/router'
 import styles from './index.module.css'
 
+const DEFAULT_REDIRECT_PATH = '/app/list'
+
+const WHITELISTED_REDIRECT_PATHS = [
+  '/app/list',
+  '/app/edit'
+]
 
 const ConnectPage = () => {
-
   const { connect, isConnected } = useWallet()
   const router = useRouter()
 
-  if (isConnected) {
-    router.push('/app/list')
+  const resolveRedirectPath = () => {
+    const redirectPath = router.query.redirect
+
+    return WHITELISTED_REDIRECT_PATHS.includes(redirectPath)
+      ? redirectPath
+      : DEFAULT_REDIRECT_PATH
   }
+
+  const tryRedirectToDestination = () => {
+    if (isConnected) {
+      const path = resolveRedirectPath()
+      router.push(path)
+    }
+  }
+
+  useEffect(() => {
+    tryRedirectToDestination()
+  }, [isConnected])
 
   return (
     <Card
@@ -23,7 +44,7 @@ const ConnectPage = () => {
       <div className={styles.body}>
 
         <Link
-          label="Learn about ethOS2"
+          label="Learn about ethOS"
           href="https://ethereumphone.org"
           target="_blank"
         />

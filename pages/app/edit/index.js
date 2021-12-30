@@ -3,6 +3,7 @@ import Card from '../../../components/Card'
 import Button from '../../../components/Button'
 import TextInput from '../../../components/TextInput'
 import styles from './index.module.css'
+import ConnectedPage from '../../../components/ConnectedPage'
 
 const AppEditPage = () => {
 
@@ -12,7 +13,7 @@ const AppEditPage = () => {
   
 
   return (
-    <>
+    <ConnectedPage>
       <Card
         title="List new dApp"
         isBackEnabled={true}>
@@ -44,7 +45,7 @@ const AppEditPage = () => {
         </div>
 
       </Card>
-    </>
+    </ConnectedPage>
   )
 }
 

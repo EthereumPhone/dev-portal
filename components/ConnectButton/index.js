@@ -1,6 +1,5 @@
-import styles from './index.module.css'
-
 import { useWallet } from '../../components/WalletProvider'
+import styles from './index.module.css'
 
 
 const generateFriendlyAddress = (address) => {
@@ -16,7 +15,7 @@ const generateFriendlyAddress = (address) => {
 const tryGenerateFriendlyAddress = (address) => (
   address
     ? generateFriendlyAddress(address)
-    : ''
+    : 'Address: N/A'
 )
 
 const ConnectedButton = ({ address, onClick }) => (
