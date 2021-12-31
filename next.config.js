@@ -5,7 +5,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/home',
+        destination: '/connect',
         permanent: false
       },
     ]
