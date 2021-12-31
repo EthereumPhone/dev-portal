@@ -1,9 +1,6 @@
 .body {
-  height: 30em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 26em;
+  overflow-y: scroll;
 }
 
 .empty {
@@ -11,6 +8,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding-top: 2.4em;
 }
 
 .empty-text {
@@ -22,6 +21,60 @@
   margin-top: 2em;
 }
 
+.list-view {
+  padding: 1.5em 0 1.5em 0;
+}
+
 .button {
+  width: calc(100% - 4.8em);
+  margin: 2.4em 2.4em 0 2.4em;
+}
+
+.card {
+  padding: 2.4em 0 2.4em 0;
+  box-sizing: border-box;
+}
+
+.card-header {
+  padding: 0 2.4em 0 2.4em;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
   width: 100%;
+  padding: 0.8em 2.4em 0.8em 2.4em;
+}
+
+.app-item:hover {
+  background-color: #2b2b2b;
+}
+
+.app-item-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.3em;
+}
+
+.app-item-name {
+  font-weight: bold;
+  color: white;
+  font-size: 0.9em;
+}
+
+.app-item-category {
+  text-transform: uppercase;
+  color: #a3a0ff;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+.app-item-description {
+  color: white;
+  opacity: 0.5;
+  font-size: 0.85em;
+  line-height: 140%;
+  margin: 0.3em 0 0 0;
 }
