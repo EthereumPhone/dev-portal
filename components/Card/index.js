@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import styles from './index.module.css'
 
 
-const Card = ({ isBackEnabled = false, backPath, title, description, children }) => {
+const Card = ({ isBackEnabled = false, backPath, title, description, children, className, headerClassName }) => {
   const router = useRouter()
 
   const tryRedirectToPath = () => {
@@ -11,9 +11,9 @@ const Card = ({ isBackEnabled = false, backPath, title, description, children })
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className}`}>
       
-      <div className={styles.header}>
+      <div className={`${styles.header} ${headerClassName}`}>
 
         {isBackEnabled &&
           <BackButton

@@ -34,7 +34,7 @@
 
 .container {
   background-color: #232323;
-  padding: 2.5em;
+  padding: 2.4em;
   border-radius: 32px;
   box-sizing: border-box;
   width: 100%;
@@ -42,6 +42,6 @@
 
 @media (min-width: 768px) {
   .container {
-    width: 27em;
+    width: 29em;
   }
 }
