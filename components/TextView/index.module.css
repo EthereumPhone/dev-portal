@@ -4,7 +4,7 @@
     position: relative;
     height: 6em;
     width: 100%;
-    border-radius: 1em;
+    border-radius: .3em;
 }
 
 .container:hover {
@@ -23,7 +23,7 @@
 .input {
     position: absolute;
     background-color: transparent;
-    border-radius: 1em;
+    border-radius: .3em;
     border: none;
     height: 100%;
     width: 100%;
@@ -32,4 +32,6 @@
     font-size: 1.1em;
     font-weight: 300;
     font-family: 'Inter', sans-serif;
+    resize: none;
+    overflow-y: scroll;
 }
