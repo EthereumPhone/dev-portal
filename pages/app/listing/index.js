@@ -15,7 +15,7 @@ function listing() {
             <Card
                 title="dApp Listing"
                 isBackEnabled={true}>
-                
+
                 <div className={styles.cardhero}>
                     <div className={styles.img}></div>
                     <div className={styles.details}>
@@ -32,28 +32,28 @@ function listing() {
 
                 </div>
 
-                
+
 
                 <div className={styles.actions}>
-                    <Link href="../listing">
+                    <Link href="../app/edit">
                         <div>
-                        <SecondaryButton
-                            label="Edit Listing"
-                            onClick={() => {}}
+                            <SecondaryButton
+                                label="Edit Listing"
+                                onClick={() => { }}
                             />
-                            
+
                         </div>
                     </Link>
-                    <Link href="../edit">
+                    <Link href="../app/portal">
                         <div >
                             <Button
-                            label="Continue"
-                            
+                                label="Continue"
+
                             />
                         </div>
                     </Link>
                 </div>
-                
+
 
 
             </Card>

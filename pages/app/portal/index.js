@@ -9,6 +9,8 @@ import Link from 'next/link'
 import styles from './index.module.css'
 
 function DeveloperPortal() {
+
+    const amount = 0;
     return (
         <div className={styles.container}>
             <Card
@@ -17,28 +19,42 @@ function DeveloperPortal() {
 
                 <div className={styles.dapps}>
 
-                   {[...Array(parseInt(3))].map((index, i) => {
+
+                    {(amount>0) ?
+                    
+                    
+                    [...Array(parseInt(amount))].map((index, i) => {
                         return (
                             <>
                                 <PortaldApp />
                             </>
                         )
-                    })} 
+                    })
+                
+                    :
+                    <>
+                    <div className={styles.no_apps}>
+                        <div className={styles.img}></div>
+                        <p className={styles.description_short} >You haven’t listed any dApps yet. Click below to get started </p>
+                    </div>
+                    
+                    </>
+                }
                 </div>
-                
 
 
-                
-                    <Link href="../edit">
-                        <div className={styles.actions} >
-                            <button
-                                className={styles.button}
-                                onClick="#">
-                                List New App
-                            </button>
-                        </div>
-                    </Link>
-            
+
+
+                <Link href="../app/edit">
+                    <div className={styles.actions} >
+                        <button
+                            className={styles.button}
+                            >
+                            List New App
+                        </button>
+                    </div>
+                </Link>
+
             </Card>
         </div>
     )
