@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../../../components/Card'
 import Button from '../../../components/Button'
+import SecondaryButton from '../../../components/SecondaryButton'
 import Link from 'next/link'
 import appIconSrc from './app.svg'
 import Image from 'next/image'
@@ -49,8 +50,8 @@ function AppDetails() {
                 <div className={styles.actions}>
                     <Link href="../edit">
                         <div >
-                            <Button
-                                label="Edit"
+                            <SecondaryButton
+                                label="Edit Listing"
 
                             />
                         </div>

@@ -33,7 +33,6 @@ div.actions>* {
 .img {
     width: 5em;
     height: 5em;
-    background-color: #9396e0;
     border-radius: 50%;
     flex-shrink: 0;
 }

@@ -5,6 +5,7 @@ import TextInput from '../../../components/TextInput'
 import TextArea from '../../../components/TextArea'
 import styles from './index.module.css'
 import ConnectedPage from '../../../components/ConnectedPage'
+import Link from 'next/link'
 
 const AppEditPage = () => {
 
@@ -45,11 +46,14 @@ const AppEditPage = () => {
         </div>
 
         <div className={styles.buttons}>
-          <Button
+          <Link href="../details">
+            <Button
             className={styles['continue-button']}
             label="Continue"
             onClick={() => { }}
           />
+          </Link>
+          
         </div>
 
       </Card>
