@@ -1,0 +1,32 @@
+.title {
+    color: white;
+    font-weight: bold;
+    line-height: 170%;
+    font-size: 1.4em;
+    margin-left: 0.5em;
+}
+
+.dapps {
+    max-height: 25rem;
+    overflow-y: auto;
+    margin-bottom: 2em;
+}
+
+.actions {
+    width: 100%;
+}
+
+.button {
+    color: white;
+    border: none;
+    background-color: #5159e9;
+    font-size: 1.1em;
+    height: 3.2em;
+    width: 100%;
+    border-radius: 10em;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.94;
+}
