@@ -1,0 +1,36 @@
+.container {
+    background-color: #303038;
+    position: relative;
+    height: 6em;
+    width: 100%;
+    border-radius: .3em;
+}
+
+.container:hover {
+    opacity: 0.88;
+}
+
+.label {
+    position: absolute;
+    color: #9396e0;
+    font-weight: 300;
+    top: 0.5em;
+    left: 1.8em;
+    font-size: 0.9em;
+}
+
+.input {
+    position: absolute;
+    background-color: transparent;
+    border-radius: .3em;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    overflow-y: auto;
+}
