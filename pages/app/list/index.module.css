@@ -1,80 +1,80 @@
 .body {
-  height: 26em;
-  overflow-y: scroll;
+    max-height: 26em;
+    overflow-y: auto;
 }
 
 .empty {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding-top: 2.4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 2.4em;
 }
 
 .empty-text {
-  color: white;
-  opacity: 0.5;
-  text-align: center;
-  line-height: 140%;
-  font-size: 0.9em;
-  margin-top: 2em;
+    color: white;
+    opacity: 0.5;
+    text-align: center;
+    line-height: 140%;
+    font-size: 0.9em;
+    margin-top: 2em;
 }
 
 .list-view {
-  padding: 1.5em 0 1.5em 0;
+    padding: 1.5em 0 1.5em 0;
 }
 
 .button {
-  width: calc(100% - 4.8em);
-  margin: 2.4em 2.4em 0 2.4em;
+    width: calc(100% - 4.8em);
+    margin: 2.4em 2.4em 0 2.4em;
 }
 
 .card {
-  padding: 2.4em 0 2.4em 0;
-  box-sizing: border-box;
+    padding: 2.4em 0 2.4em 0;
+    box-sizing: border-box;
 }
 
 .card-header {
-  padding: 0 2.4em 0 2.4em;
+    padding: 0 2.4em 0 2.4em;
 }
 
 .app-item {
-  display: flex;
-  flex-direction: row;
-  cursor: pointer;
-  width: 100%;
-  padding: 0.8em 2.4em 0.8em 2.4em;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    width: 100%;
+    padding: 0.8em 2.4em 0.8em 2.4em;
 }
 
 .app-item:hover {
-  background-color: #2b2b2b;
+    background-color: #2b2b2b;
 }
 
 .app-item-info {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1.3em;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.3em;
 }
 
 .app-item-name {
-  font-weight: bold;
-  color: white;
-  font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    font-size: 0.9em;
 }
 
 .app-item-category {
-  text-transform: uppercase;
-  color: #a3a0ff;
-  font-weight: bold;
-  font-size: 0.8em;
-  margin-top: 0.5em;
+    text-transform: uppercase;
+    color: #a3a0ff;
+    font-weight: bold;
+    font-size: 0.8em;
+    margin-top: 0.5em;
 }
 
 .app-item-description {
-  color: white;
-  opacity: 0.5;
-  font-size: 0.85em;
-  line-height: 140%;
-  margin: 0.3em 0 0 0;
+    color: white;
+    opacity: 0.5;
+    font-size: 0.85em;
+    line-height: 140%;
+    margin: 0.3em 0 0 0;
 }

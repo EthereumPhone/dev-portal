@@ -1,33 +1,35 @@
 .container {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 400;
 }
 
-.connected, .disconnected {
-  background-color: #221f34;
-  border-radius: 10em;
-  height: 2.8em;
-  width: 11em;
-  color: #9396e0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.connected,
+.disconnected {
+    background-color: #221f34;
+    border-radius: 10em;
+    height: 2.8em;
+    width: 11em;
+    color: #9396e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .connected {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 1em;
-  padding-right: 0.6em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 0.6em;
 }
 
 .circle {
-  background-color: #CF7204;
-  width: 1.8em;
-  height: 1.8em;
-  border-radius: 1em;
+    background-color: #CF7204;
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 1em;
 }
