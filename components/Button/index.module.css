@@ -1,15 +1,24 @@
-.container {
-  color: white;
-  border: none;
-  background-color: #5550F2;
+.base {
   font-size: 1em;
-  height: 3.2em;
-  min-width: 8em;
-  width: auto;
   border-radius: 10em;
   cursor: pointer;
+  width: auto;
+  height: 3.2em;
+  min-width: 8em;
+  border: none;
 }
 
-.container:hover {
+.primary-button {
+  color: white;
+  background-color: #5550F2;
+}
+
+.secondary-button {
+  background-color: #f1f1f1;
+  color: #5159e9;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
   opacity: 0.94;
 }
