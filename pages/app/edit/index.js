@@ -5,9 +5,11 @@ import TextInput from '../../../components/TextInput'
 import TextArea from '../../../components/TextArea'
 import styles from './index.module.css'
 import ConnectedPage from '../../../components/ConnectedPage'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const AppEditPage = () => {
+
+  const router = useRouter()
 
   const [name, setName] = useState('')
   const [logoUrl, setLogoUrl] = useState('')
@@ -46,14 +48,11 @@ const AppEditPage = () => {
         </div>
 
         <div className={styles.buttons}>
-          <Link href="../details">
-            <Button
+          <Button
             className={styles['continue-button']}
             label="Continue"
-            onClick={() => { }}
-          />
-          </Link>
-          
+            onClick={() => router.push('/app/details')}
+        />      
         </div>
 
       </Card>
