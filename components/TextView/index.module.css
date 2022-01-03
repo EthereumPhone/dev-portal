@@ -33,5 +33,5 @@
     font-weight: 300;
     font-family: 'Inter', sans-serif;
     resize: none;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
