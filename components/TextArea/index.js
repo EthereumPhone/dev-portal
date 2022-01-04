@@ -1,26 +1,37 @@
+import { useRef } from 'react'
 import styles from './index.module.css'
+
 
 const TextArea = ({ label, value = '', onChange, onValueChange }) => {
 
-    const handleOnChange = (event) => {
-        if (!!onChange) onChange(event)
-        if (!!onValueChange) onValueChange(event.target.value)
-    }
+  const inputRef = useRef(null)
 
-    return (
-        <div className={styles.container}>
+  const focusOnInput = () => {
+    inputRef.current && inputRef.current.focus()
+  }
 
-            <textarea
-                className={styles.input}
-                value={value}
-                onChange={handleOnChange}
-            >
-                <span className={styles.label}>
-                    {label}
-                </span>
-            </textarea>
-        </div>
-    )
+  const handleOnChange = (event) => {
+    if (!!onChange) onChange(event)
+    if (!!onValueChange) onValueChange(event.target.value)
+  }
+
+  return (
+    <div 
+      className={styles.container}
+      onClick={focusOnInput}>
+
+      <span className={styles.label}>
+        {label}
+      </span>
+      <textarea
+        ref={inputRef}
+        className={styles.textarea}
+        value={value}
+        onChange={handleOnChange}>
+      </textarea>
+
+    </div>
+  )
 }
 
 export default TextArea
