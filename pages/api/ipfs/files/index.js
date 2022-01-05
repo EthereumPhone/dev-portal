@@ -1,6 +1,7 @@
 import nextConnect from 'next-connect'
 import { StatusCodes } from 'http-status-codes'
 const { create } = require('ipfs-http-client')
+const multer  = require('multer')
 
 
 const resolveSignature = () => {
@@ -40,17 +41,26 @@ const apiRoute = nextConnect({
   }
 })
 
+const formMiddleware = multer({ storage: multer.memoryStorage() })
+apiRoute.use(formMiddleware.single('file'))
+
 apiRoute.post(async (req, res) => {
 
   const client = resolveClient()
 
   const { cid } = await client.add({
-    content: Buffer.from('Hello world!')
+    content: req.file.buffer
   })  
 
   res.status(StatusCodes.OK).json({
     cid: cid.toString()
   })
 })
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
 
 export default apiRoute
