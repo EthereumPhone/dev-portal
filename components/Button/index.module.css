@@ -8,6 +8,14 @@
   border: none;
 }
 
+.base:disabled {
+  opacity: 0.2;
+}
+
+.base:disabled:hover {
+  opacity: 0.22;
+}
+
 .primary-button {
   color: white;
   background-color: #5550F2;
@@ -21,4 +29,22 @@
 .primary-button:hover,
 .secondary-button:hover {
   opacity: 0.94;
+}
+
+@keyframes processing-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.processing {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #5159e9);
+  background-size: 400% 400%;
+  animation: processing-animation 3s ease infinite;
 }

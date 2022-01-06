@@ -1,3 +1,4 @@
+import classes from 'classnames'
 import styles from './index.module.css'
 
 export const ButtonType = {
@@ -10,11 +11,22 @@ const Styles = {
   [ButtonType.SECONDARY]: styles['secondary-button']
 }
 
-const Button = ({ label, onClick, className, type = ButtonType.PRIMARY }) => (
+const Button = ({ label, onClick, className, type = ButtonType.PRIMARY, isDisabled = false, isProcessing = false }) => (
   <button
-    className={`${styles.base} ${Styles[type]} ${className}`}
+    className={classes(
+      styles.base,
+      Styles[type],
+      className,
+      { [styles.processing]: isProcessing }
+    )}
+    disabled={isDisabled}
     onClick={onClick}>
-    {label}
+
+    {isProcessing &&
+      <span>Working...</span>
+    }
+
+    {!isProcessing && label}
   </button>
 )
 
