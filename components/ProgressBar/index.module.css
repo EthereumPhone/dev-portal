@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.bar_wrapper {
+  margin: 0.25em 0 0 0;
+  height: 4px;
+  width: 100%;
+  overflow: hidden;
+}
+
+@keyframes progress-bar-animation {
+  0% {
+    width: 10%;
+  }
+  
+  100% {
+    width: 50%;
+  }
+}
+
+.bar {
+  height: 100%;
+  background-color: #5550f2;
+  animation-name: progress-bar-animation;
+  animation-iteration-count: 1;
+  animation-duration: 2s;
+}
+
+.complete_label {
+  color: white;
+  font-weight: 300;
+  font-size: 0.8em;
+  margin-top: 0.3em;
+}
+
+.top_label {
+  color: white;
+  font-weight: 500;
+  font-size: 0.8em;
+}
