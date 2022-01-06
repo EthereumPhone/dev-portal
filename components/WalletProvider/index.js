@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import appsContract from '../../contracts'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 
@@ -24,6 +25,7 @@ export const WalletProvider = ({ children }) => {
   const [state, setState] =  useState({
     modal: null,
     provider: null,
+    contract: null,
     isConnecting: false,
     isConnected: false,
     address: ''
@@ -64,11 +66,13 @@ export const WalletProvider = ({ children }) => {
 
     const modalProvider = await state.modal.connect()
     const provider = new ethers.providers.Web3Provider(modalProvider)
+    const contract = new ethers.Contract(appsContract.address, appsContract.abi, provider.getSigner())
     const accounts = await provider.listAccounts()
 
     setState({
       ...state,
       provider,
+      contract,
       isConnecting: false,
       isConnected: true,
       address: accounts[0]
@@ -82,6 +86,7 @@ export const WalletProvider = ({ children }) => {
     setState({
       ...state,
       provider: null,
+      contract: null,
       isConnecting: false,
       isConnected: false,
       address: ''
@@ -94,6 +99,7 @@ export const WalletProvider = ({ children }) => {
       isConnected: state.isConnected,
       address: state.address,
       provider: state.provider,
+      contract: state.contract,
       connect,
       disconnect,
     }),
