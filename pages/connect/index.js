@@ -10,7 +10,7 @@ const DEFAULT_REDIRECT_PATH = '/app/list'
 
 const WHITELISTED_REDIRECT_PATHS = [
   '/app/list',
-  '/app/edit'
+  '/app/new'
 ]
 
 const ConnectPage = () => {
@@ -20,7 +20,9 @@ const ConnectPage = () => {
   const resolveRedirectPath = () => {
     const redirectPath = router.query.redirect
 
-    return WHITELISTED_REDIRECT_PATHS.includes(redirectPath)
+    const normalizedRedirectPath = redirectPath.split('?')[0]
+
+    return WHITELISTED_REDIRECT_PATHS.includes(normalizedRedirectPath)
       ? redirectPath
       : DEFAULT_REDIRECT_PATH
   }

@@ -13,7 +13,7 @@ const ConnectedPage = ({ children }) => {
       router.push({
         pathname: '/connect',
         query: {
-          redirect: encodeURI(router.pathname)
+          redirect: encodeURI(router.asPath)
         }
       })
     }
