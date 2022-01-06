@@ -13,11 +13,11 @@
 
 @keyframes progress-bar-animation {
   0% {
-    width: 10%;
+    width: 0%;
   }
   
   100% {
-    width: 50%;
+    width: 100%;
   }
 }
 
