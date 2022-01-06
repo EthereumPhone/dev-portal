@@ -53,9 +53,9 @@ const Progress = ({ fileName, percentComplete, onDelete }) => (
   </div>
 )
 
-const DropzoneContent = ({ onDrop }) => {
+const DropzoneContent = ({ onDrop, fileTypes }) => {
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: fileTypes })
 
   return (
     <div 
@@ -83,7 +83,7 @@ const DropzoneContent = ({ onDrop }) => {
   )
 }
 
-const FileDrop = ({ title, className, file, onDropped, removeFile }) => {
+const FileDrop = ({ title, className, file, onDropped, removeFile, fileTypes = '' }) => {
 
   const onDrop = useCallback(files => {
     onDropped(files[0])
@@ -97,6 +97,7 @@ const FileDrop = ({ title, className, file, onDropped, removeFile }) => {
 
       <DropzoneContent
         onDrop={onDrop}
+        fileTypes={fileTypes}
       />
 
       {file &&
