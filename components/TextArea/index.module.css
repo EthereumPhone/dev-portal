@@ -6,6 +6,11 @@
   overflow: hidden;
   padding-top: 0.3em;
   cursor: text;
+  border: 1px solid transparent;
+}
+
+.container:focus-within {
+  border: 1px solid #5550f2;
 }
 
 .container:hover {

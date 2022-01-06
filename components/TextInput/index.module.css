@@ -3,6 +3,11 @@
   position: relative;
   height: 3.5em;
   border-radius: 10em;
+  border: 1px solid transparent;
+}
+
+.container:focus-within {
+  border: 1px solid #5550f2;
 }
 
 .container:hover {
