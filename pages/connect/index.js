@@ -20,7 +20,7 @@ const ConnectPage = () => {
   const resolveRedirectPath = () => {
     const redirectPath = router.query.redirect
 
-    const normalizedRedirectPath = redirectPath.split('?')[0]
+    //const normalizedRedirectPath = redirectPath.split('?')[0]
 
     return WHITELISTED_REDIRECT_PATHS.includes(redirectPath)
       ? redirectPath
