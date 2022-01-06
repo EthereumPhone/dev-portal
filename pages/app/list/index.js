@@ -2,6 +2,7 @@ import Card from '../../../components/Card'
 import Button from '../../../components/Button'
 import ConnectedPage from '../../../components/ConnectedPage'
 import Image from 'next/image'
+import { withRouter } from 'next/router'
 import emptyIcon from './empty.svg'
 import appIconSrc from './app.svg'
 import checkSrc from './check.svg'
@@ -62,7 +63,6 @@ const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
 
 const ListView = ({ items }) => (
   <div className={styles.list_view}>
-    <SubmitMessage />
     {items.map((item, index) => (
       <AppItem
         key={`app-item-${index}`}
@@ -92,31 +92,40 @@ const TEST_ITEMS = [
   }
 ]
 
-const ListedApps = () => (
-  <ConnectedPage>
-    <Card
-      title="Listed dApps"
-      className={styles.card}
-      headerClassName={styles.card_header}>
+const ListedApps = ({ router }) => {
+  const isSubmitPending = router.query.pending === '1'
 
-      <div className={styles.body}>
+  return (
+    <ConnectedPage>
+      <Card
+        title="Listed dApps"
+        className={styles.card}
+        headerClassName={styles.card_header}>
 
-        {!TEST_ITEMS.length &&
-          <EmptyView />
-        }
+        <div className={styles.body}>
 
-        {TEST_ITEMS.length &&
-          <ListView items={TEST_ITEMS} />
-        }
-      </div>
+          {isSubmitPending &&
+            <SubmitMessage />
+          }
 
-      <Button
-        className={styles.button}
-        label="List New dApp"
-      />
+          {!TEST_ITEMS.length &&
+            <EmptyView />
+          }
 
-    </Card>
-  </ConnectedPage>
-)
+          {!!TEST_ITEMS.length &&
+            <ListView items={TEST_ITEMS} />
+          }
+        </div>
 
-export default ListedApps
+        <Button
+          className={styles.button}
+          label="List New dApp"
+          onClick={() => router.push('/app/new')}
+        />
+
+      </Card>
+    </ConnectedPage>
+  )
+}
+
+export default withRouter(ListedApps)
