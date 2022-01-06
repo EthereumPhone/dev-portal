@@ -96,11 +96,6 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           value={name}
           onValueChange={setName}
         />
-        <TextInput
-          label="APK IPFS URL"
-          value={apkUrl}
-          onValueChange={setApkUrl}
-        />
         <TextArea
           label="Description"
           value={description}

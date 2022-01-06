@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.container:hover {
+  opacity: 0.88;
+}
+
 .title {
   color: #a19efc;
   text-align: center;
