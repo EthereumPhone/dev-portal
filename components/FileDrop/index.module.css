@@ -1,0 +1,81 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: #a19efc;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1em;
+  font-weight: 300;
+  font-size: 0.95em;
+}
+
+.drop_zone {
+  height: 10em;
+  width: 100%;
+  background-color: #303038;
+  border-radius: 2em;
+  border: 1px dashed #4d4c6c;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.drop_zone_active {
+  border: 1px solid #5550f2;
+}
+
+.upload_icon_wrapper,
+.file_icon_wrapper {
+  width: 2em;
+}
+
+.file_icon_wrapper {
+  margin-top: 0.3em;
+}
+
+.progress {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 1em;
+  height: 4em;
+}
+
+.progress_info {
+  margin-left: 0.8em;
+  width: 100%;
+  position: relative;
+}
+
+.delete_icon_wrapper {
+  position: absolute;
+  width: 1.2em;
+  right: 0;
+  top: -0.2em;
+  cursor: pointer;
+}
+
+.instruction {
+  margin: 1.2em 0 0 0;
+  color: #9396e0;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.instruction_browse {
+  color: white;
+  text-decoration: underline;
+  font-weight: 400;
+  opacity: 0.9;
+}
