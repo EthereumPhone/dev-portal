@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './index.module.css'
 
 
-const Tooltip = ({ delayInMs = 400, children, content }) => {
+const Tooltip = ({ delayInMs = 100, children, content }) => {
 
   let timeout
 
