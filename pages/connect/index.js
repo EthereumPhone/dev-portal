@@ -22,7 +22,7 @@ const ConnectPage = () => {
 
     const normalizedRedirectPath = redirectPath.split('?')[0]
 
-    return WHITELISTED_REDIRECT_PATHS.includes(normalizedRedirectPath)
+    return WHITELISTED_REDIRECT_PATHS.includes(redirectPath)
       ? redirectPath
       : DEFAULT_REDIRECT_PATH
   }
