@@ -18,11 +18,10 @@ const ConnectPage = () => {
   const router = useRouter()
 
   const resolveRedirectPath = () => {
-    const redirectPath = router.query.redirect
+    const redirectPath = router.query.redirect || DEFAULT_REDIRECT_PATH
+    const normalizedRedirectPath = redirectPath.split('?')[0]
 
-    //const normalizedRedirectPath = redirectPath.split('?')[0]
-
-    return WHITELISTED_REDIRECT_PATHS.includes(redirectPath)
+    return WHITELISTED_REDIRECT_PATHS.includes(normalizedRedirectPath)
       ? redirectPath
       : DEFAULT_REDIRECT_PATH
   }
