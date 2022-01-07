@@ -11,6 +11,11 @@
   }
 }
 
+@keyframes loader-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -25,7 +30,7 @@
   border-radius: 10em;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #5159e9);
   background-size: 400% 400%;
-  animation: loader-animation 3s ease infinite;
+  animation: loader-fade-in 1s ease, loader-animation 3s ease infinite;
 }
 
 .label {

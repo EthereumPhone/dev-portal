@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react'
 import Card from '../../../components/Card'
 import Button from '../../../components/Button'
+import Loader from '../../../components/Loader'
+import { useWallet } from '../../../components/WalletProvider'
+import { fetchApps } from '../../../clients/app'
 import Image from 'next/image'
 import { withRouter } from 'next/router'
 import emptyIcon from './empty.svg'
@@ -41,7 +45,7 @@ const SubmitMessage = () => (
 
 const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
   <div className={styles.app_item}>
-    <Image
+    <img
       className={styles.app_item_logo}
       src={logoSrc}
     />
@@ -59,40 +63,47 @@ const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
   </div>
 )
 
-const ListView = ({ items }) => (
+const ListView = ({ apps }) => (
   <div className={styles.list_view}>
-    {items.map((item, index) => (
+    {apps.map((app, index) => (
       <AppItem
         key={`app-item-${index}`}
-        name={item.name}
-        category={item.category}
-        description={item.description}
+        logoSrc={app.logoUrl}
+        name={app.appName}
+        category={app.category || 'N/A'}
+        description={app.description || 'N/A'}
       />
     ))}
   </div>
 )
 
-const TEST_ITEMS = [
-  {
-    name: 'Ethereum dApp',
-    category: 'Exchange',
-    description: 'A short little description goes right here'
-  },
-  {
-    name: 'Ethereum dApp',
-    category: 'Exchange',
-    description: 'A short little description goes right here'
-  },
-  {
-    name: 'Ethereum dApp',
-    category: 'Exchange',
-    description: 'A short little description goes right here'
-  }
-]
+const LoaderView = () => (
+  <div className={styles.loader_view}>
+    <Loader label="Loading apps..." />
+  </div>
+)
 
 const ListedApps = ({ router }) => {
 
+  const { address } = useWallet()
+  const [apps, setApps] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
   const isSubmitPending = router.query.pending === '1'
+
+  const resolveApps = async () => {
+    setIsLoading(true)
+
+    const apps = await fetchApps({ ownerAddress: address })
+    //TODO: Error & Try again
+
+    setApps(apps)
+    setIsLoading(false)
+  }
+
+  useEffect(async () => {
+    resolveApps()
+  }, [])
 
   return (
     <Card
@@ -106,14 +117,18 @@ const ListedApps = ({ router }) => {
           <SubmitMessage />
         }
 
-          {!TEST_ITEMS.length &&
-            <EmptyView />
-          }
+        {!apps.length && !isLoading &&
+          <EmptyView />
+        }
 
-          {!!TEST_ITEMS.length &&
-            <ListView items={TEST_ITEMS} />
-          }
-        </div>
+        {!apps.length && isLoading &&
+          <LoaderView />
+        }
+
+        {!!apps.length &&
+          <ListView apps={apps} />
+        }
+      </div>
 
       <Button
         className={styles.button}

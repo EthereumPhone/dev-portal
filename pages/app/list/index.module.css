@@ -1,5 +1,6 @@
 .body {
   max-height: 26em;
+  min-height: 26em;
   overflow-y: auto;
   padding-top: 2em;
 }
@@ -120,4 +121,12 @@
   padding: 0 2.4em 0 1.1em;
   display: flex;
   justify-content: center;
+}
+
+.loader_view {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8em;
 }
