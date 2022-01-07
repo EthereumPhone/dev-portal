@@ -25,27 +25,6 @@ const EmptyView = () => (
   </div>
 )
 
-const SubmitMessage = () => (
-  <div className={styles.submit_message}>
-    <div className={styles.submit_check_wrapper}>
-      <Image
-        src={checkSrc}
-        alt="checked"
-      />
-    </div>
-    <div className={styles.submit_message_text_wrapper}>
-      <span
-        className={styles.submit_message_title}>
-          dApp Successfully Submitted
-      </span>
-      <span
-        className={styles.submit_message_description}>
-          Please allow a few moments for your dApp to appear here.
-      </span>
-    </div>
-  </div>
-)
-
 const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
   <div className={styles.app_item}>
     <img
@@ -89,10 +68,8 @@ const LoaderView = () => (
 const ListedApps = ({ router }) => {
 
   const { address } = useWallet()
-  const [isSubmitPending, setIsSubmitPending] = useState(router.query.pending === '1')
   const [apps, setApps] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [initialAppCount, setInitialAppCount] = useState(0)
 
   const resolveApps = async () => {
     setIsLoading(true)
@@ -102,32 +79,15 @@ const ListedApps = ({ router }) => {
 
     setApps(apps)
     setIsLoading(false)
-
-    return apps.length
-  }
-
-  const resolveAppsInitially = async () => {
-    const initialAppCount = await resolveApps()
-    setInitialAppCount(initialAppCount)
-  }
-
-  const tryDismissSubmitPendingMessage = () => {
-    if (apps.length !== initialAppCount) {
-      setIsSubmitPending(false)
-    }
   }
 
   useEffect(async () => {
-    resolveAppsInitially()
+    resolveApps()
   }, [])
 
   useInterval(() => {
     resolveApps()
   }, POLL_INTERVAL_IN_MS)
-
-  useEffect(() => {
-    tryDismissSubmitPendingMessage()
-  }, [apps])
 
   return (
     <Card
@@ -136,10 +96,6 @@ const ListedApps = ({ router }) => {
       headerClassName={styles.card_header}>
 
       <div className={styles.body}>
-
-        {isSubmitPending &&
-          <SubmitMessage />
-        }
 
         {!apps.length && !isLoading &&
           <EmptyView />
