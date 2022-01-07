@@ -9,7 +9,6 @@ import Image from 'next/image'
 import { withRouter } from 'next/router'
 import emptyIcon from './empty.svg'
 import appIconSrc from './app.svg'
-import checkSrc from './check.svg'
 import styles from './index.module.css'
 
 
