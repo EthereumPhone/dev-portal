@@ -62,6 +62,10 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
   }
 
   const trySubmit = async () => {
+    if (isProcessing) {
+      return
+    }
+
     setIsProcessing(true)
 
     try {
