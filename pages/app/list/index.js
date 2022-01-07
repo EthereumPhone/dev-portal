@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { sortBy, compose, negate, prop } from 'ramda'
 import Card from '../../../components/Card'
 import Button from '../../../components/Button'
 import Loader from '../../../components/Loader'
@@ -64,6 +65,8 @@ const LoaderView = () => (
   </div>
 )
 
+const sortByIdDesc = sortBy(compose(negate, prop('id')))
+
 const ListedApps = ({ router }) => {
 
   const { address } = useWallet()
@@ -76,7 +79,7 @@ const ListedApps = ({ router }) => {
     const apps = await fetchApps({ ownerAddress: address })
     //TODO: Error & Try again
 
-    setApps(apps)
+    setApps(sortByIdDesc(apps))
     setIsLoading(false)
   }
 
