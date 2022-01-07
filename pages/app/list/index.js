@@ -4,6 +4,7 @@ import Button from '../../../components/Button'
 import Loader from '../../../components/Loader'
 import { useWallet } from '../../../components/WalletProvider'
 import { fetchApps } from '../../../clients/app'
+import useInterval from '../../../hooks/useInterval'
 import Image from 'next/image'
 import { withRouter } from 'next/router'
 import emptyIcon from './empty.svg'
@@ -11,6 +12,8 @@ import appIconSrc from './app.svg'
 import checkSrc from './check.svg'
 import styles from './index.module.css'
 
+
+const POLL_INTERVAL_IN_MS = 10000
 
 const EmptyView = () => (
   <div className={styles.empty}>
@@ -86,10 +89,10 @@ const LoaderView = () => (
 const ListedApps = ({ router }) => {
 
   const { address } = useWallet()
+  const [isSubmitPending, setIsSubmitPending] = useState(router.query.pending === '1')
   const [apps, setApps] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-
-  const isSubmitPending = router.query.pending === '1'
+  const [initialAppCount, setInitialAppCount] = useState(0)
 
   const resolveApps = async () => {
     setIsLoading(true)
@@ -99,11 +102,32 @@ const ListedApps = ({ router }) => {
 
     setApps(apps)
     setIsLoading(false)
+
+    return apps.length
+  }
+
+  const resolveAppsInitially = async () => {
+    const initialAppCount = await resolveApps()
+    setInitialAppCount(initialAppCount)
+  }
+
+  const tryDismissSubmitPendingMessage = () => {
+    if (apps.length !== initialAppCount) {
+      setIsSubmitPending(false)
+    }
   }
 
   useEffect(async () => {
-    resolveApps()
+    resolveAppsInitially()
   }, [])
+
+  useInterval(() => {
+    resolveApps()
+  }, POLL_INTERVAL_IN_MS)
+
+  useEffect(() => {
+    tryDismissSubmitPendingMessage()
+  }, [apps])
 
   return (
     <Card
