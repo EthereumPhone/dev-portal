@@ -1,6 +1,5 @@
 import Card from '../../../components/Card'
 import Button from '../../../components/Button'
-import ConnectedPage from '../../../components/ConnectedPage'
 import Image from 'next/image'
 import { withRouter } from 'next/router'
 import emptyIcon from './empty.svg'
@@ -45,7 +44,6 @@ const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
     <Image
       className={styles.app_item_logo}
       src={logoSrc}
-      alt="app logo"
     />
     <div className={styles.app_item_info}>
       <span className={styles.app_item_name}>
@@ -93,20 +91,20 @@ const TEST_ITEMS = [
 ]
 
 const ListedApps = ({ router }) => {
+
   const isSubmitPending = router.query.pending === '1'
 
   return (
-    <ConnectedPage>
-      <Card
-        title="Listed dApps"
-        className={styles.card}
-        headerClassName={styles.card_header}>
+    <Card
+      title="Listed dApps"
+      className={styles.card}
+      headerClassName={styles.card_header}>
 
-        <div className={styles.body}>
+      <div className={styles.body}>
 
-          {isSubmitPending &&
-            <SubmitMessage />
-          }
+        {isSubmitPending &&
+          <SubmitMessage />
+        }
 
           {!TEST_ITEMS.length &&
             <EmptyView />
@@ -117,15 +115,20 @@ const ListedApps = ({ router }) => {
           }
         </div>
 
-        <Button
-          className={styles.button}
-          label="List New dApp"
-          onClick={() => router.push('/app/new')}
-        />
+      <Button
+        className={styles.button}
+        label="List New dApp"
+        onClick={() => router.push('/app/new')}
+      />
 
-      </Card>
-    </ConnectedPage>
+    </Card>
   )
 }
+
+export const getStaticProps = async () => ({
+  props: {
+    isProtected: true
+  }
+})
 
 export default withRouter(ListedApps)
