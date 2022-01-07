@@ -58,6 +58,16 @@
   margin-left: 1.3em;
 }
 
+.app_item_logo {
+  width: 4em;
+  height: 4em;
+  background-color: #2b2b2b;
+  border-radius: 10em;
+  overflow: hidden;
+  border: none;
+  text-indent: -1000px;
+}
+
 .app_item_name {
   font-weight: bold;
   color: white;
