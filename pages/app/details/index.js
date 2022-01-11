@@ -51,11 +51,6 @@ const AppDetails = () => {
 
   const [app, setApp] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-
-  if (process.browser && !router.query.id) {
-    router.push('/app/list')
-    return null
-  }
   
   const loadApp = async () => {
     setIsLoading(true)
@@ -70,6 +65,10 @@ const AppDetails = () => {
     loadApp()
   }, [])
 
+  if (process.browser && !router.query.id) {
+    router.push('/app/list')
+    return null
+  }
 
   return (
     <div className={styles.container}>
