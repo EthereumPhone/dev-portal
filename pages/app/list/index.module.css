@@ -35,6 +35,7 @@
 .card {
   padding: 2.4em 0 2.4em 0;
   box-sizing: border-box;
+  min-height: 38.5em;
 }
 
 .card_header {

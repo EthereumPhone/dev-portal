@@ -10,18 +10,23 @@ const DEFAULT_REDIRECT_PATH = '/app/list'
 
 const WHITELISTED_REDIRECT_PATHS = [
   '/app/list',
-  '/app/new'
+  '/app/new',
+  '/app/details'
 ]
+
+const isWhitelisted = (path) => (
+  WHITELISTED_REDIRECT_PATHS.includes(path)
+)
 
 const ConnectPage = () => {
   const { connect, isConnected } = useWallet()
   const router = useRouter()
 
   const resolveRedirectPath = () => {
-    const redirectPath = router.query.redirect || DEFAULT_REDIRECT_PATH
+    const redirectPath = decodeURI(router.query.redirect) || DEFAULT_REDIRECT_PATH
     const normalizedRedirectPath = redirectPath.split('?')[0]
 
-    return WHITELISTED_REDIRECT_PATHS.includes(normalizedRedirectPath)
+    return isWhitelisted(normalizedRedirectPath)
       ? redirectPath
       : DEFAULT_REDIRECT_PATH
   }

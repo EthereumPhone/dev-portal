@@ -1,9 +1,10 @@
 import BackButton from '../BackButton'
 import { useRouter } from 'next/router'
+import classes from 'classnames'
 import styles from './index.module.css'
 
 
-const Card = ({ isBackEnabled = false, backPath, title, description, children, className, headerClassName }) => {
+const Card = ({ isBackEnabled = false, backPath, title, description, children, className, headerClassName, childrenClassName }) => {
   const router = useRouter()
 
   const tryRedirectToPath = () => {
@@ -36,7 +37,7 @@ const Card = ({ isBackEnabled = false, backPath, title, description, children, c
         </div>
       </div>
 
-      <div className={styles.children}>
+      <div className={classes(styles.children, childrenClassName)}>
         {children}
       </div>
     </div>

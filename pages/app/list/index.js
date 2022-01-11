@@ -25,8 +25,11 @@ const EmptyView = () => (
   </div>
 )
 
-const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
-  <div className={styles.app_item}>
+const AppItem = ({ logoSrc = appIconSrc, name, category, description, onClick }) => (
+  <div
+    className={styles.app_item} 
+    onClick={onClick}>
+
     <img
       className={styles.app_item_logo}
       src={logoSrc}
@@ -45,7 +48,7 @@ const AppItem = ({ logoSrc = appIconSrc, name, category, description }) => (
   </div>
 )
 
-const ListView = ({ apps }) => (
+const ListView = ({ apps, onAppClick }) => (
   <div className={styles.list_view}>
     {apps.map((app, index) => (
       <AppItem
@@ -54,6 +57,7 @@ const ListView = ({ apps }) => (
         name={app.appName}
         category={app.category || 'N/A'}
         description={app.description || 'N/A'}
+        onClick={() => onAppClick(app.id)}
       />
     ))}
   </div>
@@ -91,6 +95,10 @@ const ListedApps = ({ router }) => {
     resolveApps()
   }, POLL_INTERVAL_IN_MS)
 
+  const showAppDetails = (appId) => {
+    router.push(`/app/details?id=${appId}`)
+  }
+
   return (
     <Card
       title="Listed dApps"
@@ -108,7 +116,10 @@ const ListedApps = ({ router }) => {
         }
 
         {!!apps.length &&
-          <ListView apps={apps} />
+          <ListView
+            apps={apps}
+            onAppClick={showAppDetails}
+          />
         }
       </div>
 
