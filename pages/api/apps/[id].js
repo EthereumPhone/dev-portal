@@ -13,9 +13,9 @@ const resolveClient = () => {
   return client
 }
 
-const buildQuery = ({ appOwner }) => (
+const buildQuery = ({ appId }) => (
   `query {
-    apps(where: { appOwner: "${appOwner}" }) {
+    apps(where: { id: "${appId}" }) {
       id
       appOwner
       appName
@@ -42,11 +42,12 @@ const apiRoute = nextConnect({
 
 apiRoute.get(async (req, res) => {
   const client = resolveClient()
-  const query = buildQuery({ appOwner: req.query.owner })
+
+  const query = buildQuery({ appId: req.query.id })
   const result = await client.query(query).toPromise()
-  
+
   const apps = mapApps(result.data.apps)
-  res.status(StatusCodes.OK).json(apps)
+  res.status(StatusCodes.OK).json(apps[0])
 })
 
 export default apiRoute
