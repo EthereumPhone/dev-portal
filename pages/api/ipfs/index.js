@@ -35,6 +35,10 @@ const resolveClient = () => {
 
 
 const apiRoute = nextConnect({
+  onError: (err, req, res) => {
+    console.error('ipfs_error', err)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).end()
+  },
   onNoMatch(req, res) {
     res.status(StatusCodes.METHOD_NOT_ALLOWED)
       .json({ error: `Method ${req.method} not allowed` })
