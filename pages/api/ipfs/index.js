@@ -1,7 +1,8 @@
 import nextConnect from 'next-connect'
 import { StatusCodes } from 'http-status-codes'
-const { create } = require('ipfs-http-client')
-const multer  = require('multer')
+import { create } from 'ipfs-http-client'
+import multer from 'multer'
+import { captureException } from '@sentry/nextjs'
 
 
 const resolveSignature = () => {
@@ -36,7 +37,7 @@ const resolveClient = () => {
 
 const apiRoute = nextConnect({
   onError: (err, req, res) => {
-    console.error('ipfs_error', err)
+    captureException(err)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).end()
   },
   onNoMatch(req, res) {
