@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { addFile, addJsonFile } from '../../clients/ipfs.js'
+const { create } = require('ipfs-http-client')
 import Card from '../Card'
 import Button from '../Button'
 import TextInput from '../TextInput'
@@ -53,10 +54,29 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
   }
 
   const submit = async () => {
-    const { cid: logoCid } = await addFile(logo)
-    const { cid: apkCid } = await addFile(apk)
-    const { cid: additionalDataCid } = await addAdditionalData({ logoCid })
+    const client = create('https://ipfs.infura.io:5001/api/v0')
+    let logoCid = await client.add(logo);
+    let apkCid = await client.add(apk);
+    logoCid = logoCid.cid.toString()
+    apkCid = apkCid.cid.toString()
+    //const { cid: logoCid } = await addFile(logo)
+    //const { cid: apkCid } = await addFile(apk)
+    //const { cid: additionalDataCid } = await addAdditionalData({ logoCid })
 
+    let additionalDataCid = await client.add(JSON.stringify({
+      logo: logoCid,
+      description,
+
+      //TODO:
+      developer: 'ethereumphone.org',
+      type: 'test-type',
+      category: 'test-category',
+      images: [
+        //'QmRMgMHmekE8y57u4Hm1BwGhyocx9gXkH1hEHjHL5nJsyR'
+      ],
+      version: '0.0.1'
+    }));
+    additionalDataCid = additionalDataCid.cid.toString()
     const transaction = await contract.submitDApp(name, apkCid, additionalDataCid)
     await transaction.wait()
   }
@@ -75,7 +95,7 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
     } catch (error) {
       //TODO: error handling
       setIsProcessing(false)
-      alert('Here is a janky error dialog. We will do better :)')
+      console.log(error)
     }
   }
 
@@ -123,7 +143,7 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           isDisabled={!isComplete}
           isProcessing={isProcessing}
           onClick={trySubmit}
-      />      
+        />
       </div>
 
     </Card>
