@@ -8,7 +8,7 @@ import TextArea from '../TextArea'
 import styles from './index.module.css'
 import { useWallet } from '../WalletProvider/index.js'
 import Tooltip from '../Tooltip/index.js'
-import FileDrop from '../FileDrop/index.js'
+//import FileDrop from '../FileDrop/index.js'
 
 
 const AppInputCard = ({ title, backPath, onSubmit }) => {
@@ -18,14 +18,15 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [logo, setLogo] = useState(null)
-  const [apk, setApk] = useState(null)
+  //const [apk, setApk] = useState(null)
+  const [apkCid, setApkCid] = useState('')
 
   const [isComplete, setIsComplete] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
 
   const checkIsComplete = () => {
-    return name && description && logo && apk
+    return name && description && logo && apkCid
   }
 
   const updateIsComplete = () => {
@@ -54,7 +55,7 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
 
   const submit = async () => {
     const { cid: logoCid } = await addFile(logo)
-    const { cid: apkCid } = await addFile(apk)
+    //const { cid: apkCid } = await addFile(apk)
     const { cid: additionalDataCid } = await addAdditionalData({ logoCid })
 
     const transaction = await contract.submitDApp(name, apkCid, additionalDataCid)
@@ -75,7 +76,8 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
     } catch (error) {
       //TODO: error handling
       setIsProcessing(false)
-      alert('Here is a janky error dialog. We will do better :)')
+      alert('Error: ', error.message)
+      console.log(error)
     }
   }
 
@@ -100,12 +102,18 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           value={name}
           onValueChange={setName}
         />
+        <TextInput
+          label="APK IPFS CID"
+          value={apkCid}
+          onValueChange={setApkCid}
+        />
         <TextArea
           label="Description"
           value={description}
           onValueChange={setDescription}
         />
 
+        {/*
         <FileDrop
           title="Upload your .apk file"
           className={styles.apk}
@@ -114,6 +122,7 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           onDropped={file => setApk(file)}
           removeFile={() => setApk(null)}
         />
+        */}
       </div>
 
       <div className={styles.buttons}>
