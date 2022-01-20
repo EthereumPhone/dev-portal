@@ -9,6 +9,7 @@
     "pull-dev-vars": "vercel env pull"
   },
   "dependencies": {
+    "@sentry/nextjs": "^6.16.1",
     "@walletconnect/web3-provider": "^1.7.0",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
