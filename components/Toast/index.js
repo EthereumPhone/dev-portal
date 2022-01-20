@@ -1,4 +1,5 @@
 import { useEffect, useState, createContext, useContext, useCallback } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image'
 import errorSrc from './error.svg'
 import styles from './index.module.css'
@@ -32,8 +33,12 @@ const ToastContextProvider = ({ children }) => {
     }
   }, [toasts])
 
+  // Example call: addToast({ message: 'Invalid selection' })
   const addToast = useCallback(
-    (toast) => setToasts([...toasts, toast]),
+    (toast) => {
+      toast.id = uuidv4() // Unique ID for key
+      setToasts([...toasts, toast])
+    },
     [toasts]
   )
 
@@ -41,7 +46,7 @@ const ToastContextProvider = ({ children }) => {
     <ToastContext.Provider value={addToast}>
       {children}
       <div className={styles.toastcontainer}>
-        {toasts.map((toast) => <Toast message={toast} />)}
+        {toasts.map((toast) => <Toast key={toast.id} message={toast.message} />)}
       </div>
     </ToastContext.Provider>
   )
