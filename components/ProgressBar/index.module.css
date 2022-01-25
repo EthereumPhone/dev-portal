@@ -11,22 +11,10 @@
   background-color: #303038;
 }
 
-@keyframes progress-bar-animation {
-  0% {
-    width: 0%;
-  }
-  
-  100% {
-    width: 100%;
-  }
-}
-
 .bar {
   height: 100%;
   background-color: #5550f2;
-  animation-name: progress-bar-animation;
-  animation-iteration-count: 1;
-  animation-duration: 2s;
+  transition: width 2s ease-in-out;
 }
 
 .complete_label {

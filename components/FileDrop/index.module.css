@@ -33,8 +33,10 @@
   cursor: pointer;
 }
 
+.drop_zone:focus,
 .drop_zone_active {
   border: 1px solid #5550f2;
+  outline: none;
 }
 
 .upload_icon_wrapper,
