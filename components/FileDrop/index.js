@@ -84,7 +84,7 @@ const DropzoneContent = ({ onDrop, fileTypes }) => {
 }
 
 const FileDrop = ({ title, className, file, onDropped, removeFile, fileTypes = '', percentComplete = 0 }) => {
-console.log('>> ', percentComplete)
+
   const onDrop = useCallback(files => {
     onDropped(files[0])
   }, [])
