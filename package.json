@@ -1,6 +1,9 @@
 {
   "name": "web-dapp-admin",
   "private": true,
+  "engines": {
+    "node": ">=14.17.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +16,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "ethers": "^5.5.2",
+    "gcs-browser-upload": "^1.0.2",
     "graphql": "^16.2.0",
     "http-status-codes": "^2.2.0",
     "ipfs-http-client": "^55.0.0",
@@ -23,6 +27,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-dropzone": "^11.4.2",
+    "regenerator": "^0.14.7",
     "urql": "^2.0.6",
     "uuid": "^8.3.2",
     "web3modal": "^1.9.4"
