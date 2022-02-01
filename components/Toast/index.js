@@ -4,16 +4,20 @@ import Image from 'next/image'
 import errorSrc from './error.svg'
 import styles from './index.module.css'
 
-const ToastContext = createContext();
+const VISIBLE_IN_MS = 5000
+
+const ToastContext = createContext()
 
 const Toast = ({ message }) => {
   return (
     <div className={styles.toast}>
-      <div className={styles.toastcontent}>
-        <Image
-          src={errorSrc}
-          alt="error icon"  
-        />
+      <div className={styles.content}>
+        <div className={styles.icon_wrapper}>
+          <Image
+            src={errorSrc}
+            alt="error icon"
+          />
+        </div>
         <div className={styles.text}>
           <div className={styles.title}>Error</div>
           <div className={styles.message}>{message}</div>
@@ -28,7 +32,7 @@ const ToastContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (toasts.length > 0) {
-      const timeout = setTimeout(() => setToasts([...toasts.slice(1)]), 10000)
+      const timeout = setTimeout(() => setToasts([...toasts.slice(1)]), VISIBLE_IN_MS)
       return () => clearTimeout(timeout)
     }
   }, [toasts])
@@ -36,7 +40,7 @@ const ToastContextProvider = ({ children }) => {
   // Example call: addToast({ message: 'Invalid selection' })
   const addToast = useCallback(
     (toast) => {
-      toast.id = uuidv4() // Unique ID for key
+      toast.id = uuidv4()
       setToasts([...toasts, toast])
     },
     [toasts]
@@ -45,7 +49,7 @@ const ToastContextProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={addToast}>
       {children}
-      <div className={styles.toastcontainer}>
+      <div className={styles.container}>
         {toasts.map((toast) => <Toast key={toast.id} message={toast.message} />)}
       </div>
     </ToastContext.Provider>
