@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { addFile, addJsonFile } from '../../clients/ipfs.js'
+import { startUpload, pinToIpfs } from '../../clients/apk.js'
 import Card from '../Card'
 import Button from '../Button'
 import TextInput from '../TextInput'
@@ -8,18 +9,26 @@ import TextArea from '../TextArea'
 import styles from './index.module.css'
 import { useWallet } from '../WalletProvider/index.js'
 import Tooltip from '../Tooltip/index.js'
-//import FileDrop from '../FileDrop/index.js'
+import FileDrop from '../FileDrop/index.js'
+import GcsUpload from 'gcs-browser-upload'
+import { useToast } from '../Toast'
+
+
+const UPLOAD_PIN_DELTA = 90
 
 
 const AppInputCard = ({ title, backPath, onSubmit }) => {
 
   const { contract } = useWallet()
 
+  const toastIt = useToast()
+
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [logo, setLogo] = useState(null)
-  //const [apk, setApk] = useState(null)
-  const [apkCid, setApkCid] = useState('')
+  const [apk, setApk] = useState(null)
+  const [apkCid, setApkCid] = useState(null)
+  const [apkUploadPercentComplete, setApkUploadPercentComplete] = useState(0)
 
   const [isComplete, setIsComplete] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -53,9 +62,68 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
     })
   }
 
+  const resetApk = () => {
+    setApk(null)
+    setApkCid(null)
+  }
+
+  const onFileUploaded = async ({ fileName, uploadId }) => {
+    try {
+      const { cid } = await pinToIpfs({
+        uploadId: uploadId,
+        apkName: fileName
+      })
+      setApkUploadPercentComplete(100)
+      setApkCid(cid)
+
+    } catch (error) {
+      toastIt({ message: 'APK upload failed. Please try uploading again.' })
+      resetApk()
+    }
+  }
+
+  const onChunkUpload = ({ uploadedBytes, totalBytes }) => {
+    let percentComplete = Math.round(uploadedBytes / totalBytes * 100)
+
+    if (percentComplete > UPLOAD_PIN_DELTA) {
+      percentComplete = UPLOAD_PIN_DELTA
+    }
+
+    setApkUploadPercentComplete(percentComplete)
+  }
+
+  const onApkDropped = async (file) => {
+    
+    setApk(file)
+    setApkCid(null)
+    
+    const uploadConfig = await startUpload()
+
+    var upload = new GcsUpload({
+      id: uploadConfig.uploadId,
+      url: uploadConfig.url,
+      file,
+      chunkSize: 262144 * 20,
+      contentType: 'application/vnd.android.package-archive',
+      onChunkUpload
+    })
+
+    try {
+      await upload.start()
+      onFileUploaded({
+        fileName: file.name,
+        uploadId: uploadConfig.uploadId
+      })
+
+    } catch (error) {
+      resetApk()
+      toastIt({ message: 'APK upload failed. Please try uploading again.' })
+    }
+  }
+
   const submit = async () => {
     const { cid: logoCid } = await addFile(logo)
-    //const { cid: apkCid } = await addFile(apk)
+
     const { cid: additionalDataCid } = await addAdditionalData({ logoCid })
 
     const transaction = await contract.submitDApp(name, apkCid, additionalDataCid)
@@ -74,10 +142,8 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
       setIsProcessing(false)
       onSubmit()
     } catch (error) {
-      //TODO: error handling
+      toastIt({ message: 'Transaction failed. Please try again.' })
       setIsProcessing(false)
-      alert('Error: ', error.message)
-      console.log(error)
     }
   }
 
@@ -102,27 +168,21 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           value={name}
           onValueChange={setName}
         />
-        <TextInput
-          label="APK IPFS CID"
-          value={apkCid}
-          onValueChange={setApkCid}
-        />
         <TextArea
           label="Description"
           value={description}
           onValueChange={setDescription}
         />
 
-        {/*
         <FileDrop
           title="Upload your .apk file"
           className={styles.apk}
           fileTypes=".apk"
           file={apk}
-          onDropped={file => setApk(file)}
-          removeFile={() => setApk(null)}
+          onDropped={onApkDropped}
+          removeFile={resetApk}
+          percentComplete={apkUploadPercentComplete}
         />
-        */}
       </div>
 
       <div className={styles.buttons}>
