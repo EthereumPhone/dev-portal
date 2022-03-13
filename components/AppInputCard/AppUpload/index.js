@@ -3,7 +3,7 @@ import { startUpload, pinToIpfs } from '../../../clients/apk.js'
 import { useToast } from '../../Toast'
 import Button, { ButtonType } from '../../Button'
 import TextInput from '../../TextInput'
-import FileDrop from '../../FileDrop/index.js'
+import FileDrop from '../../FileDrop'
 import GcsUpload from 'gcs-browser-upload'
 import styles from './index.module.css'
 
