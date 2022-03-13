@@ -1,21 +1,36 @@
 import TextInput from '../../TextInput'
 import ImageUpload from '../../ImageUpload'
 import TextArea from '../../TextArea'
-import Tooltip from '../../Tooltip/index.js'
+import Tooltip from '../../Tooltip'
 import Button from '../../Button'
+import { useToast } from '../../Toast'
+import { addFile } from '../../../clients/ipfs.js'
 import styles from './index.module.css'
 
 
-const AppDetails = ({ logo, setLogo, name, setName, description, setDescription, onNext }) => {
+const AppDetails = ({ logo, setLogo, setLogoCid, name, setName, description, setDescription, onNext }) => {
+
+  const toastIt = useToast()
 
   const isComplete = logo && name && description
+
+  const onLogoUpload = async (file) => {
+    try {
+      const { cid } = await addFile(file)
+      setLogoCid(cid)
+      setLogo(file)
+
+    } catch (err) {
+      toastIt({ message: 'Could not upload logo. Please try again.' })
+    }
+  }
 
   return (
     <div className={styles.container} key="app-details">
       <Tooltip
         content="Add App Icon">
         <ImageUpload
-          onUpload={setLogo}
+          onUpload={onLogoUpload}
           image={logo}
         />
       </Tooltip>
