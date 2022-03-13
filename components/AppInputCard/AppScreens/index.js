@@ -5,7 +5,14 @@ import { addFile } from '../../../clients/ipfs.js'
 import styles from './index.module.css'
 
 
-const AppScreens = ({ screenshotFiles, setScreenshotFiles, screenshotCids, setScreenshotCids, onBack, onNext }) => {
+const AppScreens = ({
+  screenshotFiles,
+  setScreenshotFiles,
+  screenshotCids,
+  setScreenshotCids,
+  onBack,
+  onNext,
+  isProcessing }) => {
 
   const toastIt = useToast()
 
@@ -70,6 +77,7 @@ const AppScreens = ({ screenshotFiles, setScreenshotFiles, screenshotCids, setSc
         <Button
           className={styles.button}
           label="Back"
+          isDisabled={isProcessing}
           onClick={onBack}
           type={ButtonType.SECONDARY}
         />
@@ -79,6 +87,7 @@ const AppScreens = ({ screenshotFiles, setScreenshotFiles, screenshotCids, setSc
           isDisabled={!isComplete}
           onClick={onNext}
           type={ButtonType.PRIMARY}
+          isProcessing={isProcessing}
         />
       </div>
 

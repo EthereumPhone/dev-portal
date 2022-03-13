@@ -102,6 +102,7 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
           setScreenshotCids={setScreenshotCids}
           onNext={trySubmit}
           onBack={() => setStepId(StepId.UPLOAD)}
+          isProcessing={isProcessing}
         />
       }
 
