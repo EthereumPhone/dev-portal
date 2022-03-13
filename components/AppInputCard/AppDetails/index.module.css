@@ -1,0 +1,24 @@
+.container {
+  margin: 3em 0 0 0;
+}
+
+.container > div:not(:first-child) {
+  margin-top: 1.5em;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4em !important;
+}
+
+.button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .button {
+    width: auto;
+  }
+}
