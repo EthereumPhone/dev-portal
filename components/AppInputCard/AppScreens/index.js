@@ -20,7 +20,7 @@ const AppScreens = ({ screenshotFiles, setScreenshotFiles, screenshotCids, setSc
     }
   }
 
-  const addScreenshot = ({ key, file }) => {
+  const addScreenshot = async ({ key, file }) => {
     const { cid } = await addFile(file)
     updateScreenshotFiles({ key, file })
     updateScreenshotCids({ key, cid })
