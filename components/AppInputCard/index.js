@@ -1,21 +1,18 @@
-import { useState, useEffect } from 'react'
-import { addFile, addJsonFile } from '../../clients/ipfs.js'
-import { startUpload, pinToIpfs } from '../../clients/apk.js'
+import { useState } from 'react'
+import { addJsonFile } from '../../clients/ipfs.js'
 import Card from '../Card'
-import Button from '../Button'
-import TextInput from '../TextInput'
-import ImageUpload from '../ImageUpload'
-import TextArea from '../TextArea'
-import styles from './index.module.css'
-import { useWallet } from '../WalletProvider/index.js'
-import Tooltip from '../Tooltip/index.js'
-import FileDrop from '../FileDrop/index.js'
-import GcsUpload from 'gcs-browser-upload'
+import AppDetails from './AppDetails'
+import AppUpload from './AppUpload'
+import AppScreens from './AppScreens'
+import { useWallet } from '../WalletProvider'
 import { useToast } from '../Toast'
 
 
-const UPLOAD_PIN_DELTA = 90
-
+const StepId = {
+  DETAILS: 0,
+  APK: 1,
+  SCREENS: 2
+}
 
 const AppInputCard = ({ title, backPath, onSubmit }) => {
 
@@ -23,109 +20,29 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
 
   const toastIt = useToast()
 
+  const [stepId, setStepId] = useState(StepId.DETAILS)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [logo, setLogo] = useState(null)
-  const [apk, setApk] = useState(null)
+  const [logoCid, setLogoCid] = useState(null)
+  const [version, setVersion] = useState('')
   const [apkCid, setApkCid] = useState(null)
-  const [apkUploadPercentComplete, setApkUploadPercentComplete] = useState(0)
-
-  const [isComplete, setIsComplete] = useState(false)
+  const [screenshotFiles, setScreenshotFiles] = useState({})
+  const [screenshotCids, setScreenshotCids] = useState({})
   const [isProcessing, setIsProcessing] = useState(false)
 
 
-  const checkIsComplete = () => {
-    return name && description && logo && apkCid
-  }
-
-  const updateIsComplete = () => {
-    setIsComplete(checkIsComplete())
-  }
-
-  useEffect(() => {
-    updateIsComplete()
-  })
-
-  const addAdditionalData = ({ logoCid }) => {
+  const addAdditionalData = () => {
     return addJsonFile({
       logo: logoCid,
       description,
-
-      //TODO:
-      developer: 'ethereumphone.org',
-      type: 'test-type',
-      category: 'test-category',
-      images: [
-        //'QmRMgMHmekE8y57u4Hm1BwGhyocx9gXkH1hEHjHL5nJsyR'
-      ],
-      version: '0.0.1'
+      version,
+      screenshots: Object.values(screenshotCids)
     })
-  }
-
-  const resetApk = () => {
-    setApk(null)
-    setApkCid(null)
-  }
-
-  const onFileUploaded = async ({ fileName, uploadId }) => {
-    try {
-      const { cid } = await pinToIpfs({
-        uploadId: uploadId,
-        apkName: fileName
-      })
-      setApkUploadPercentComplete(100)
-      setApkCid(cid)
-
-    } catch (error) {
-      toastIt({ message: 'APK upload failed. Please try uploading again.' })
-      resetApk()
-    }
-  }
-
-  const onChunkUpload = ({ uploadedBytes, totalBytes }) => {
-    let percentComplete = Math.round(uploadedBytes / totalBytes * 100)
-
-    if (percentComplete > UPLOAD_PIN_DELTA) {
-      percentComplete = UPLOAD_PIN_DELTA
-    }
-
-    setApkUploadPercentComplete(percentComplete)
-  }
-
-  const onApkDropped = async (file) => {
-    
-    setApk(file)
-    setApkCid(null)
-    
-    const uploadConfig = await startUpload()
-
-    var upload = new GcsUpload({
-      id: uploadConfig.uploadId,
-      url: uploadConfig.url,
-      file,
-      chunkSize: 262144 * 20,
-      contentType: 'application/vnd.android.package-archive',
-      onChunkUpload
-    })
-
-    try {
-      await upload.start()
-      onFileUploaded({
-        fileName: file.name,
-        uploadId: uploadConfig.uploadId
-      })
-
-    } catch (error) {
-      resetApk()
-      toastIt({ message: 'APK upload failed. Please try uploading again.' })
-    }
   }
 
   const submit = async () => {
-    const { cid: logoCid } = await addFile(logo)
-
-    const { cid: additionalDataCid } = await addAdditionalData({ logoCid })
-
+    const { cid: additionalDataCid } = await addAdditionalData()
     const transaction = await contract.submitDApp(name, apkCid, additionalDataCid)
     await transaction.wait()
   }
@@ -153,47 +70,40 @@ const AppInputCard = ({ title, backPath, onSubmit }) => {
       isBackEnabled={true}
       backPath={backPath}>
 
-      <div className={styles.inputs}>
-
-        <Tooltip
-          content="Add App Icon">
-          <ImageUpload
-            onUpload={setLogo}
-            image={logo}
-          />
-        </Tooltip>
-
-        <TextInput
-          label="Name"
-          value={name}
-          onValueChange={setName}
+      {stepId === StepId.DETAILS &&
+        <AppDetails
+          name={name}
+          logo={logo}
+          description={description}
+          setName={setName}
+          setLogo={setLogo}
+          setLogoCid={setLogoCid}
+          setDescription={setDescription}
+          onNext={() => setStepId(StepId.APK)}
         />
-        <TextArea
-          label="Description"
-          value={description}
-          onValueChange={setDescription}
-        />
+      }
 
-        <FileDrop
-          title="Upload your .apk file"
-          className={styles.apk}
-          fileTypes=".apk"
-          file={apk}
-          onDropped={onApkDropped}
-          removeFile={resetApk}
-          percentComplete={apkUploadPercentComplete}
+      {stepId === StepId.APK &&
+        <AppUpload
+          version={version}
+          setVersion={setVersion}
+          apkCid={apkCid}
+          setApkCid={setApkCid}
+          onNext={() => setStepId(StepId.SCREENS)}
+          onBack={() => setStepId(StepId.DETAILS)}
         />
-      </div>
+      }
 
-      <div className={styles.buttons}>
-        <Button
-          className={styles.continue_button}
-          label="Continue"
-          isDisabled={!isComplete}
-          isProcessing={isProcessing}
-          onClick={trySubmit}
-      />      
-      </div>
+      {stepId === StepId.SCREENS &&
+        <AppScreens
+          screenshotFiles={screenshotFiles}
+          setScreenshotFiles={setScreenshotFiles}
+          screenshotCids={screenshotCids}
+          setScreenshotCids={setScreenshotCids}
+          onNext={trySubmit}
+          onBack={() => setStepId(StepId.UPLOAD)}
+        />
+      }
 
     </Card>
   )

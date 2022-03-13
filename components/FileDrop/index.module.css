@@ -77,6 +77,7 @@
   color: #9396e0;
   font-weight: 300;
   font-size: 0.9em;
+  text-align: center;
 }
 
 .instruction_browse {
@@ -84,4 +85,10 @@
   text-decoration: underline;
   font-weight: 400;
   opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .instruction {
+    padding: 0 3em;
+  }
 }

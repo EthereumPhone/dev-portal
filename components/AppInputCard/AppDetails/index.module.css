@@ -1,8 +1,8 @@
-.inputs {
-  margin: 2em 0 1.8em 0;
+.container {
+  margin: 3em 0 0 0;
 }
 
-.inputs > div:not(:first-child) {
+.container > div:not(:first-child) {
   margin-top: 1.5em;
 }
 
@@ -10,18 +10,15 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-top: 4em !important;
 }
 
-.continue_button {
+.button {
   width: 100%;
 }
 
-.apk {
-  margin-top: 2em !important;
-}
-
 @media (min-width: 768px) {
-  .continue_button {
+  .button {
     width: auto;
   }
 }

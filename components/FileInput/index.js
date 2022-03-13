@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import styles from './index.module.css'
 
 
-const FileInput = ({ children, onUpload, onFileUpload, accept, className }) => {
+const FileInput = ({ children, onUpload, onFileUpload, accept, className, isDisabled = false }) => {
 
   const fileInput = useRef(null)
 
@@ -12,7 +12,7 @@ const FileInput = ({ children, onUpload, onFileUpload, accept, className }) => {
   }
 
   const onClick = () => {
-    fileInput.current.click()
+    !isDisabled && fileInput.current.click()
   }
 
   return (

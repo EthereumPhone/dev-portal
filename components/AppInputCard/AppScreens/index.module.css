@@ -1,0 +1,64 @@
+.container {
+  padding-top: 3em;
+  width: 100%;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4em;
+}
+
+.buttons :not(:first-child) {
+  margin-left: 1em;
+}
+
+.uploads {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.upload {
+  border-radius: 1em;
+  width: 7.5em;
+  height: 15em;
+}
+
+.screenshot {
+  border-radius: 1em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  color: #a19efc;
+  text-align: center;
+  min-width: 100%;
+  margin-bottom: 1.1em;
+  font-weight: 300;
+  font-size: 0.95em;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+
+  .buttons {
+    justify-content: space-between;
+  }
+
+  .button {
+    width: 46%;
+    min-width: 46%;
+    margin: 0;
+  }
+
+  .upload {
+    border-radius: 1em;
+    width: 5em;
+    height: 10em;
+  }
+}
