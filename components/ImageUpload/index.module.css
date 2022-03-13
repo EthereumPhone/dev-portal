@@ -9,8 +9,16 @@
   align-items: center;
 }
 
+.disabled {
+  opacity: 0.3;
+}
+
 .container:hover {
   opacity: 0.88;
+}
+
+.disabled:hover {
+  opacity: 0.25;
 }
 
 .image {
