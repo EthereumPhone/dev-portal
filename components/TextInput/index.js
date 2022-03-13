@@ -1,6 +1,8 @@
+import classes from 'classnames'
 import styles from './index.module.css'
 
-const TextInput = ({ label, value = '', onChange, onValueChange }) => {
+
+const TextInput = ({ label, value = '', onChange, onValueChange, className }) => {
 
   const handleOnChange = (event) => {
     if (!!onChange) onChange(event)
@@ -8,7 +10,7 @@ const TextInput = ({ label, value = '', onChange, onValueChange }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classes(styles.container, className)}>
       <span className={styles.label}>
         {label}
       </span>
