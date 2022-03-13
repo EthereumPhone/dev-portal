@@ -14,15 +14,18 @@ const AppDetails = ({ logo, setLogo, setLogoCid, name, setName, description, set
 
   const isComplete = logo && name && description
 
-  const onLogoUpload = async (file) => {
+  const tryUploadLogo = async (file) => {
     try {
-      const { cid } = await addFile(file)
-      setLogoCid(cid)
-      setLogo(file)
-
+      uploadLogo(file)
     } catch (err) {
       toastIt({ message: 'Could not upload logo. Please try again.' })
     }
+  }
+
+  const uploadLogo = async (file) => {
+    const { cid } = await addFile(file)
+    setLogoCid(cid)
+    setLogo(file)
   }
 
   return (
@@ -30,7 +33,7 @@ const AppDetails = ({ logo, setLogo, setLogoCid, name, setName, description, set
       <Tooltip
         content="Add App Icon">
         <ImageUpload
-          onUpload={onLogoUpload}
+          onUpload={tryUploadLogo}
           image={logo}
         />
       </Tooltip>
